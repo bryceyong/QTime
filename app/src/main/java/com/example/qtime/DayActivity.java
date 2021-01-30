@@ -9,6 +9,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,7 +17,9 @@ import android.widget.TimePicker;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DayActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
@@ -25,7 +28,7 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManger;
 
-    private ArrayList<Task> list = new ArrayList<>();
+    private ArrayList<Task> list;
     private Task currentTask;
     private int shour;
     private int smin;
@@ -39,6 +42,7 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
+        loadData();
         Button startBtn = (Button) findViewById(R.id.startTime);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,16 +70,14 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
                 TextInputEditText inputTask = (TextInputEditText) findViewById(R.id.inputTask);
                 task = inputTask.getText().toString();
                 list.add(new Task(0, shour, smin, ehour, emin, task));
+                Log.d("task", task);
                 saveData();
-
+                mAdapter.notifyDataSetChanged();
             }
         });
 
 
         //set times for Monday
-        list.add(new Task(0, 0, 0, 2, 2, "CHEM 101"));
-        list.add(new Task(0, 0, 0, 2, 2, "BIO 101"));
-        list.add(new Task(0, 3, 24, 14, 4, "GEO 101"));
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -92,6 +94,18 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
         String json = gson.toJson(list);
         editor.putString("task list", json);
         editor.apply();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
+        list = gson.fromJson(json, type);
+
+        if(list == null){
+            list = new ArrayList<>();
+        }
     }
 
 
