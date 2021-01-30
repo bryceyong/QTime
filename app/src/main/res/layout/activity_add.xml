@@ -4,80 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DayActivity">
+    tools:context=".AddActivity">
 
-
-    <TextView
-        android:id="@+id/dayOfTheWeek"
-        android:layout_width="106dp"
-        android:layout_height="46dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="411dp"
-        android:layout_height="403dp"
-        android:background="@android:color/darker_gray"
-        android:padding="4dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/inputTask"
-        android:layout_width="272dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintVertical_bias="0.532" />
 
     <Button
         android:id="@+id/startTime"
-        android:layout_width="77dp"
-        android:layout_height="44dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="startTime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintHorizontal_bias="0.238"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.901" />
+        app:layout_constraintVertical_bias="0.427" />
 
     <Button
         android:id="@+id/endTime"
-        android:layout_width="61dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="endTime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintHorizontal_bias="0.77"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.427" />
 
     <Button
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="292dp"
+        android:layout_marginStart="244dp"
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintVertical_bias="0.667" />
 
     <TextView
         android:id="@+id/startTxt"
@@ -86,10 +61,10 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/inputTask"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.286"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
+        app:layout_constraintVertical_bias="0.348" />
 
     <TextView
         android:id="@+id/endTxt"
@@ -98,9 +73,8 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintHorizontal_bias="0.762"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
-
+        app:layout_constraintVertical_bias="0.348" />
 </androidx.constraintlayout.widget.ConstraintLayout>
