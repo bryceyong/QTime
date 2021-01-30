@@ -5,28 +5,41 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.allyants.notifyme.NotifyMe;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import static com.example.qtime.WeekActivity.day;
 
 public class DayActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManger;
+
 
     private ArrayList<Task> list;
     private Task currentTask;
@@ -42,6 +55,7 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
+        createNotificationChannel();
         loadData();
         Button startBtn = (Button) findViewById(R.id.startTime);
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,9 +81,63 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 TextInputEditText inputTask = (TextInputEditText) findViewById(R.id.inputTask);
                 task = inputTask.getText().toString();
-                list.add(new Task(0, shour, smin, ehour, emin, task));
+                list.add(new Task(day, shour, smin, ehour, emin, task));
+                NotifyMe.Builder notifyMe = new NotifyMe.Builder(getApplicationContext());
+                notifyMe.title("Qtime");
+                notifyMe.content("Task");
+
+                Calendar currentTime = Calendar.getInstance();
+                Calendar alarmTime = Calendar.getInstance();
+
+                alarmTime.set(Calendar.SECOND, 0);
+                alarmTime.set(Calendar.MINUTE, smin);
+                alarmTime.set(Calendar.HOUR_OF_DAY, shour);
+
+                if(day == 2){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                } else if(day == 3){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+                } else if(day == 4){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+                }else if(day == 5){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+                }else if(day == 6){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+                }else if(day == 7){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+                }else if(day == 1){
+                    alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+                }
+
+                Intent intent = new Intent(DayActivity.this,ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(DayActivity.this, 0, intent, 0);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+
+
+
+                if (currentTime.getTimeInMillis() <  alarmTime.getTimeInMillis()) {
+                    // nothing to do - time of alarm in the future
+                } else {
+                    int dayDiffBetweenClosestday = (7 + alarmTime.get(Calendar.DAY_OF_WEEK) - currentTime.get(Calendar.DAY_OF_WEEK)) % 7;
+
+                    if (dayDiffBetweenClosestday == 0) {
+                        // Today is Friday, but current time after 3pm, so schedule for the next Friday
+                        dayDiffBetweenClosestday = 7;
+                    }
+
+                    alarmTime.add(Calendar.DAY_OF_MONTH, dayDiffBetweenClosestday);
+                    notifyMe.time(alarmTime);//The time to popup notification
+                    notifyMe.build();
+
+                }
+
                 Log.d("task", task);
                 saveData();
                 mAdapter.notifyDataSetChanged();
@@ -85,6 +153,20 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
         mAdapter = new DayAdapter(list);
         mRecyclerView.setLayoutManager(mLayoutManger);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void createNotificationChannel(){
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "LemubitReminderChannel";
+            String description = "Channel for Lemubit Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyQtime", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void saveData(){
