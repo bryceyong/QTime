@@ -33,12 +33,20 @@ public class MainActivity extends AppCompatActivity {
     private String shared;
     private ArrayList<Task> list;
     ImageView failure;
+    private int rocket;
+    ImageView rocketView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadRocketData();
+        rocketView = (ImageView)findViewById(R.id.rocket);
+        if(rocket == 1){
+            rocketView.setBackgroundResource(R.drawable.rocket);
+        }
 
         loadCatData();
         Log.d("status", Integer.toString(status));
@@ -94,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton piggy = (ImageButton) findViewById(R.id.piggy);
+        piggy.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v){
+                openShopActivity();
+            }
+        });
+
     }
 
 
@@ -101,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         Calendar cal = Calendar.getInstance();
+
+        loadRocketData();
+        rocketView = (ImageView)findViewById(R.id.rocket);
+        if(rocket == 1){
+            rocketView.setBackgroundResource(R.drawable.rocket);
+        }
 
         loadExpData();
         if(exp == 1){
@@ -138,6 +161,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openShopActivity(){
+        Intent intent = new Intent(this, ShopActivity.class);
+        startActivity(intent);
+    }
+
     public void openAfkActivity(){
         Intent intent = new Intent(this, AfkActivity.class);
         startActivity(intent);
@@ -171,6 +199,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("exp", MODE_PRIVATE);
         exp = sharedPreferences.getInt("exp", 0);
 
+    }
+
+    public void loadRocketData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("rocket", MODE_PRIVATE);
+        rocket = sharedPreferences.getInt("rocket", 0);
     }
 
 
