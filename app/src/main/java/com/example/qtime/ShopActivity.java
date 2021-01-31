@@ -13,9 +13,12 @@ public class ShopActivity extends AppCompatActivity {
 
     private int gold;
     private int rocket;
+    private int hat;
 
     ImageButton rocketView;
     TextView goldView;
+    ImageButton hatView;
+    TextView hatPrice;
     TextView rocketPrice;
 
     @Override
@@ -26,9 +29,35 @@ public class ShopActivity extends AppCompatActivity {
 
         loadGoldData();
         loadRocketData();
+        loadHatData();
 
         goldView = (TextView)findViewById(R.id.gold);
         goldView.setText(Integer.toString(gold));
+
+        rocketView = (ImageButton)findViewById(R.id.rocket);
+        rocketPrice = (TextView)findViewById(R.id.rocketPrice);
+
+        if(rocket == 0){
+            rocketView.setBackgroundResource(R.drawable.rocket);
+            rocketView.setOnClickListener(new View.OnClickListener(){
+                @Override
+
+                public void onClick(View v){
+                    if(gold >= 10){
+                        gold = gold - 10;
+                        saveGoldData();
+                        goldView.setText(Integer.toString(gold));
+                        rocket = 1;
+                        saveRocketData();
+                        rocketView.setBackgroundResource(R.drawable.sold);
+                        rocketPrice.setText("");
+                    }
+                }
+            });
+        } else {
+            rocketView.setBackgroundResource(R.drawable.sold);
+            rocketPrice.setText("");
+        }
 
         rocketView = (ImageButton)findViewById(R.id.rocket);
         rocketPrice = (TextView)findViewById(R.id.rocketPrice);
@@ -82,5 +111,19 @@ public class ShopActivity extends AppCompatActivity {
     public void loadRocketData(){
         SharedPreferences sharedPreferences = getSharedPreferences("rocket", MODE_PRIVATE);
         rocket = sharedPreferences.getInt("rocket", 0);
+    }
+
+    public void saveHatData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("hat", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("hat", hat);
+        editor.apply();
+
+    }
+
+    public void loadHatData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("hat", MODE_PRIVATE);
+        hat = sharedPreferences.getInt("hat", 0);
     }
 }
