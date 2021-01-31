@@ -39,6 +39,8 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManger;
+    private String shared;
+
 
 
     private ArrayList<Task> list;
@@ -54,6 +56,25 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
+
+
+        if(day == 2){
+            shared = "monday";
+        } else if(day == 3){
+            shared = "tuesday";
+        } else if(day == 4){
+            shared = "wednesday";
+        }else if(day == 5){
+            shared = "thursday";
+        }else if(day == 6){
+            shared = "friday";
+        }else if(day == 7){
+            shared = "saturday";
+        }else if(day == 1){
+            shared = "sunday";
+        }
+
+
 
         createNotificationChannel();
         loadData();
@@ -158,8 +179,8 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     private void createNotificationChannel(){
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "LemubitReminderChannel";
-            String description = "Channel for Lemubit Reminder";
+            CharSequence name = "QtimeReminderChannel";
+            String description = "Channel for Qtime Reminder";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("notifyQtime", name, importance);
             channel.setDescription(description);
@@ -170,7 +191,7 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     }
 
     private void saveData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(list);
@@ -179,7 +200,7 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     }
 
     private void loadData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
         Type type = new TypeToken<ArrayList<Task>>() {}.getType();

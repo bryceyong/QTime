@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.ImageButton;
 
 
 public class WeekActivity extends AppCompatActivity {
@@ -19,16 +19,83 @@ public class WeekActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week);
 
-        Button button = (Button) findViewById(R.id.monday);
-        button.setOnClickListener(new View.OnClickListener(){
+        ImageButton sunbutton = (ImageButton) findViewById(R.id.sunday);
+        sunbutton.setOnClickListener(new View.OnClickListener(){
 
             @Override
 
             public void onClick(View v){
-                day = 7;
+                day = 1;
                 openDayActivity();
             }
         });
+
+        ImageButton monbutton = (ImageButton) findViewById(R.id.monday);
+        monbutton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v){
+                day = 2;
+                openDayActivity();
+            }
+        });
+
+        ImageButton tuebutton = (ImageButton) findViewById(R.id.tuesday);
+        tuebutton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v){
+                day = 2;
+                openDayActivity();
+            }
+        });
+
+        ImageButton wedbutton = (ImageButton) findViewById(R.id.wednesday);
+        wedbutton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v){
+                day = 2;
+                openDayActivity();
+            }
+        });
+
+        ImageButton thubutton = (ImageButton) findViewById(R.id.thursday);
+        thubutton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v){
+                day = 2;
+                openDayActivity();
+            }
+        });
+
+        ImageButton fributton = (ImageButton) findViewById(R.id.friday);
+        fributton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v){
+                day = 2;
+                openDayActivity();
+            }
+        });
+
+        ImageButton satbutton = (ImageButton) findViewById(R.id.saturday);
+        satbutton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View v){
+                day = 2;
+                openDayActivity();
+            }
+        });
+
     }
 
     public void openDayActivity(){

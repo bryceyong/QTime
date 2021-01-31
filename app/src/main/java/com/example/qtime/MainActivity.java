@@ -3,17 +3,33 @@ package com.example.qtime;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.example.qtime.WeekActivity.day;
 
 public class MainActivity extends AppCompatActivity {
 
     public int today;
+    public static int status;
+    private String shared;
+    private ArrayList<Task> list;
 
 
     @Override
@@ -21,9 +37,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loadCatData();
         Calendar cal = Calendar.getInstance();
         today = cal.get(Calendar.DAY_OF_WEEK);
-        Log.d("day", Integer.toString(today));
+
+
+
+        ImageView img = (ImageView)findViewById(R.id.imageView);
+        img.setBackgroundResource(R.drawable.idle);
+        if(status > 2){
+            img.setBackgroundResource(R.drawable.happy);
+        } else if(status < 0){
+            img.setBackgroundResource(R.drawable.dead);
+        }
+
+        AnimationDrawable progressAnimation = (AnimationDrawable) img.getBackground();
+        progressAnimation.start();
+
 
         ImageButton day = (ImageButton) findViewById(R.id.day);
         day.setOnClickListener(new View.OnClickListener(){
@@ -36,8 +66,83 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    protected void onResume(){
+        Calendar cal = Calendar.getInstance();
+        today = cal.get(Calendar.DAY_OF_WEEK);
+        if(today == 2){
+            shared = "monday";
+        } else if(today == 3){
+            shared = "tuesday";
+        } else if(today == 4){
+            shared = "wednesday";
+        }else if(today == 5){
+            shared = "thursday";
+        }else if(today == 6){
+            shared = "friday";
+        }else if(today == 7){
+            shared = "saturday";
+        }else if(today == 1){
+            shared = "sunday";
+        }
+        loadTimeData();
+        ImageView img = (ImageView)findViewById(R.id.imageView);
+        img.setBackgroundResource(R.drawable.idle);
+        if(status > 2){
+            img.setBackgroundResource(R.drawable.happy);
+        } else if(status < 0){
+            img.setBackgroundResource(R.drawable.dead);
+        }
+
+        AnimationDrawable progressAnimation = (AnimationDrawable) img.getBackground();
+        progressAnimation.start();
+        super.onResume();
+    }
+
+
     public void openWeekActivity(){
         Intent intent = new Intent(this, WeekActivity.class);
         startActivity(intent);
     }
+
+    public void saveCatData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("status", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("cat", status);
+        editor.apply();
+
+    }
+
+    public void loadCatData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("status", MODE_PRIVATE);
+        status = sharedPreferences.getInt("cat", 1);
+
+    }
+
+    private void saveTimeData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+    private void loadTimeData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
+        list = gson.fromJson(json, type);
+
+        if(list == null){
+            list = new ArrayList<>();
+        }
+    }
+
+
+
 }
