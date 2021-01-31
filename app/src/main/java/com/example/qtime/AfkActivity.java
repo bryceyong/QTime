@@ -1,5 +1,6 @@
 package com.example.qtime;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -25,6 +26,9 @@ import static com.example.qtime.MainActivity.today;
 public class AfkActivity extends AppCompatActivity {
 
     private ArrayList<Task> list;
+    private int status;
+    public int exp = 0;
+    public int finish;
     private String shared;
     Calendar cS = Calendar.getInstance();
     Calendar cE = Calendar.getInstance();
@@ -41,7 +45,7 @@ public class AfkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_afk);
 
         success = (ImageView)findViewById(R.id.success);
-        success.setVisibility(View.GONE);
+        success.setBackgroundResource(R.drawable.blank);
         TextView taskbar = (TextView)findViewById(R.id.taskbar);
 
 
@@ -91,7 +95,7 @@ public class AfkActivity extends AppCompatActivity {
 
             if(startTime <= currentTime && currentTime <= endTime){
                 flag = 1;
-                timeLeftInMilliseconds = endTime - startTime;
+                timeLeftInMilliseconds = endTime - currentTime;
                 task = x.getTask();
 
                 break;
@@ -107,7 +111,40 @@ public class AfkActivity extends AppCompatActivity {
 
     }
 
+    public void onPause() {
+        loadCatData();
+        loadExpData();
+        if(finish == 1){
+            status = status - 1;
+            exp = 1;
+        }
+        saveExpData();
+        saveCatData();
+        stopTimer();
+        finish = 0;
+        timeLeftInMilliseconds = 0;
+        Log.d("run", "pause");
+        super.onPause();
+    }
+
+    public void onStop() {
+        loadCatData();
+        loadExpData();
+        if(finish == 1){
+            status = status - 1;
+            exp = 1;
+        }
+        saveExpData();
+        saveCatData();
+        stopTimer();
+        finish = 0;
+        timeLeftInMilliseconds = 0;
+        Log.d("run", "stop");
+        super.onStop();
+    }
+
     public void startTimer(){
+        finish = 1;
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
@@ -119,9 +156,15 @@ public class AfkActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                success.setVisibility(View.VISIBLE);
+                success.setBackgroundResource(R.drawable.success);
+                loadCatData();
+                status = status + 2;
+                saveCatData();
+                finish = 0;
+                Log.d("status", Integer.toString(status));
                 Log.d("sucess", "sucess");
-
+                exp = 0;
+                saveExpData();
 
             }
         }.start();
@@ -129,7 +172,9 @@ public class AfkActivity extends AppCompatActivity {
     }
 
     public void stopTimer(){
-        countDownTimer.cancel();
+        if(countDownTimer != null){
+            countDownTimer.cancel();
+        }
     }
 
     public void updateTimer(){
@@ -159,5 +204,35 @@ public class AfkActivity extends AppCompatActivity {
         if(list == null){
             list = new ArrayList<>();
         }
+    }
+
+    public void saveCatData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("status", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("cat", status);
+        editor.apply();
+
+    }
+
+    public void loadCatData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("status", MODE_PRIVATE);
+        status = sharedPreferences.getInt("cat", 1);
+
+    }
+
+    public void saveExpData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("exp", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("exp", exp);
+        editor.apply();
+
+    }
+
+    public void loadExpData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("exp", MODE_PRIVATE);
+        exp = sharedPreferences.getInt("exp", 0);
+
     }
 }

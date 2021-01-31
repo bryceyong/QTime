@@ -84,13 +84,12 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int last = list.size() - 1;
-                if(last <0 ){
-                    last = 0;
+                if(list.size() != 0){
+                    int last = list.size() - 1;
+                    list.remove(last);
+                    saveData();
+                    mAdapter.notifyDataSetChanged();
                 }
-                list.remove(last);
-                saveData();
-                mAdapter.notifyDataSetChanged();
             }
         });
 

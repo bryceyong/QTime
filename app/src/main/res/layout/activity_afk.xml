@@ -20,9 +20,13 @@
 
     <TextView
         android:id="@+id/timer"
-        android:layout_width="217dp"
-        android:layout_height="105dp"
-        android:text="2"
+        android:layout_width="261dp"
+        android:layout_height="116dp"
+        android:fontFamily="@font/paytone_one"
+        android:gravity="center"
+        android:text="00:00"
+        android:textColor="#FFFFFF"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,9 +35,13 @@
 
     <TextView
         android:id="@+id/taskbar"
-        android:layout_width="213dp"
-        android:layout_height="96dp"
-        android:text="2"
+        android:layout_width="315dp"
+        android:layout_height="133dp"
+        android:fontFamily="@font/paytone_one"
+        android:gravity="center"
+        android:text="Moonwalk"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -43,12 +51,13 @@
 
     <ImageView
         android:id="@+id/success"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.459" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

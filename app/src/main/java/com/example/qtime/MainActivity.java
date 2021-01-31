@@ -27,9 +27,11 @@ import static com.example.qtime.WeekActivity.day;
 public class MainActivity extends AppCompatActivity {
 
     public static int today;
-    public static int status;
+    private int status;
+    private int exp;
     private String shared;
     private ArrayList<Task> list;
+    ImageView failure;
 
 
     @Override
@@ -38,8 +40,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         loadCatData();
+        Log.d("status", Integer.toString(status));
         Calendar cal = Calendar.getInstance();
         today = cal.get(Calendar.DAY_OF_WEEK);
+
+        failure = (ImageView) findViewById(R.id.failure);
+
+        failure.setBackgroundResource(R.drawable.blank);
+        loadExpData();
+        if(exp == 1){
+            failure.setBackgroundResource(R.drawable.failure);
+            failure.setOnClickListener(new View.OnClickListener(){
+                @Override
+
+                public void onClick(View v){
+
+                    failure.setBackgroundResource(R.drawable.blank);
+                    exp = 0;
+                    saveExpData();
+                }
+            });
+        }
 
 
 
@@ -56,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         if(status > 2){
             img.setBackgroundResource(R.drawable.happy);
         } else if(status < 0){
-            img.setBackgroundResource(R.drawable.dead);
+            img.setBackgroundResource(R.drawable.dying);
         }
 
         AnimationDrawable progressAnimation = (AnimationDrawable) img.getBackground();
@@ -80,16 +101,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         Calendar cal = Calendar.getInstance();
 
+        loadExpData();
+        if(exp == 1){
+            failure.setBackgroundResource(R.drawable.failure);
+            failure.setOnClickListener(new View.OnClickListener(){
+                @Override
+
+                public void onClick(View v){
+
+                    failure.setBackgroundResource(R.drawable.blank);
+                    exp = 0;
+                    saveExpData();
+                }
+            });
+        }
+
         ImageView img = (ImageView)findViewById(R.id.imageView);
         img.setBackgroundResource(R.drawable.idle);
+        loadCatData();
+        Log.d("status", Integer.toString(status));
         if(status > 2){
             img.setBackgroundResource(R.drawable.happy);
         } else if(status < 0){
-            img.setBackgroundResource(R.drawable.dead);
+            img.setBackgroundResource(R.drawable.dying);
         }
 
-        AnimationDrawable progressAnimation = (AnimationDrawable) img.getBackground();
-        progressAnimation.start();
+       AnimationDrawable progressAnimation = (AnimationDrawable) img.getBackground();
+       progressAnimation.start();
         super.onResume();
     }
 
@@ -119,16 +157,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadTimeData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(shared, MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
-        list = gson.fromJson(json, type);
+    public void saveExpData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("exp", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("exp", exp);
+        editor.apply();
 
-        if(list == null){
-            list = new ArrayList<>();
-        }
+    }
+
+    public void loadExpData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("exp", MODE_PRIVATE);
+        exp = sharedPreferences.getInt("exp", 0);
+
     }
 
 
