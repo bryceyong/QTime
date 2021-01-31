@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static int today;
     private int status;
     private int exp;
+    private int gold;
     private String shared;
     private ArrayList<Task> list;
     ImageView failure;
@@ -171,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
         exp = sharedPreferences.getInt("exp", 0);
 
     }
+
+
 
 
 
