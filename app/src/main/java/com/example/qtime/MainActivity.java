@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
     ImageView goatView;
     private int goat;
     private int hat;
+    MediaPlayer song;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        song = MediaPlayer.create(this, R.raw.menu);
+        song.start();
 
         loadRocketData();
         rocketView = (ImageView)findViewById(R.id.rocket);
@@ -132,12 +135,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        song.stop();
+        super.onPause();
+    }
+
 
 
     @Override
     protected void onResume(){
         Calendar cal = Calendar.getInstance();
-
+        song = MediaPlayer.create(this, R.raw.menu);
+        song.start();
         loadRocketData();
         rocketView = (ImageView)findViewById(R.id.rocket);
         if(rocket == 1){
