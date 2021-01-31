@@ -43,6 +43,7 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManger;
     private String shared;
+    private int gold;
 
 
 
@@ -201,6 +202,20 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
     public void openAddActivity(){
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
+    }
+
+    public void saveGoldData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("gold", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("gold", gold);
+        editor.apply();
+
+    }
+
+    public void loadGoldData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("gold", MODE_PRIVATE);
+        gold = sharedPreferences.getInt("gold", 10);
     }
 
 }

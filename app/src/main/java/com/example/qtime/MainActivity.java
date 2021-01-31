@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     ImageView failure;
     private int rocket;
     ImageView rocketView;
+    ImageView hatView;
+    ImageView goatView;
+    private int goat;
+    private int hat;
 
 
     @Override
@@ -42,10 +46,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         loadRocketData();
         rocketView = (ImageView)findViewById(R.id.rocket);
         if(rocket == 1){
             rocketView.setBackgroundResource(R.drawable.rocket);
+        }
+
+        loadHatData();
+        hatView = (ImageView)findViewById(R.id.hat);
+        if(hat == 1){
+            hatView.setBackgroundResource(R.drawable.hat);
+        }
+
+        loadGoatData();
+        goatView = (ImageView)findViewById(R.id.goat);
+        if(goat == 1){
+            goatView.setBackgroundResource(R.drawable.goatfly);
+            AnimationDrawable progressAnimation = (AnimationDrawable) goatView.getBackground();
+            progressAnimation.start();
         }
 
         loadCatData();
@@ -123,6 +142,26 @@ public class MainActivity extends AppCompatActivity {
         rocketView = (ImageView)findViewById(R.id.rocket);
         if(rocket == 1){
             rocketView.setBackgroundResource(R.drawable.rocket);
+        } else {
+            rocketView.setBackgroundResource(R.drawable.blank);
+        }
+
+        loadHatData();
+        hatView = (ImageView)findViewById(R.id.hat);
+        if(hat == 1){
+            hatView.setBackgroundResource(R.drawable.hat);
+        } else {
+            rocketView.setBackgroundResource(R.drawable.blank);
+        }
+
+        loadGoatData();
+        goatView = (ImageView)findViewById(R.id.goat);
+        if(goat == 1){
+            goatView.setBackgroundResource(R.drawable.goatfly);
+            AnimationDrawable progressAnimation = (AnimationDrawable) goatView.getBackground();
+            progressAnimation.start();
+        } else {
+            rocketView.setBackgroundResource(R.drawable.blank);
         }
 
         loadExpData();
@@ -204,6 +243,34 @@ public class MainActivity extends AppCompatActivity {
     public void loadRocketData(){
         SharedPreferences sharedPreferences = getSharedPreferences("rocket", MODE_PRIVATE);
         rocket = sharedPreferences.getInt("rocket", 0);
+    }
+
+    public void saveHatData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("hat", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("hat", hat);
+        editor.apply();
+
+    }
+
+    public void loadHatData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("hat", MODE_PRIVATE);
+        hat = sharedPreferences.getInt("hat", 0);
+    }
+
+    public void saveGoatData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("goat", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("goat", goat);
+        editor.apply();
+
+    }
+
+    public void loadGoatData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("goat", MODE_PRIVATE);
+        goat = sharedPreferences.getInt("goat", 0);
     }
 
 

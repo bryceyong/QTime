@@ -1,4 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-</selector>
+    <item
+        android:drawable="@drawable/goat1"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat2"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat3"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat4"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat5"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat6"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat6"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat7"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat8"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat9"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat10"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat11"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat12"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat13"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat14"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat15"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat16"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat17"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat18"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/goat19"
+        android:duration="150" />
+
+</animation-list>

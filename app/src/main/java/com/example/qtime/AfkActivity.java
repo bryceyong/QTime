@@ -38,6 +38,7 @@ public class AfkActivity extends AppCompatActivity {
     private boolean timerRunning;
     String task;
     ImageView success;
+    private int gold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,9 @@ public class AfkActivity extends AppCompatActivity {
             public void onFinish() {
 
                 success.setBackgroundResource(R.drawable.success);
+                loadGoldData();
+                gold = gold + 3;
+                saveGoldData();
                 loadCatData();
                 status = status + 2;
                 saveCatData();
@@ -234,5 +238,19 @@ public class AfkActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("exp", MODE_PRIVATE);
         exp = sharedPreferences.getInt("exp", 0);
 
+    }
+
+    public void saveGoldData(){
+        //SharedPreference saving
+        SharedPreferences sharedPreferences = getSharedPreferences("gold", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("gold", gold);
+        editor.apply();
+
+    }
+
+    public void loadGoldData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("gold", MODE_PRIVATE);
+        gold = sharedPreferences.getInt("gold", 10);
     }
 }

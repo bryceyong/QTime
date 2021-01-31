@@ -32,6 +32,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.313" />
 
+
+    <ImageButton
+        android:id="@+id/goat"
+        android:layout_width="108dp"
+        android:layout_height="99dp"
+        android:background="@drawable/egg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.323"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.544" />
+
     <TextView
         android:id="@+id/gold"
         android:layout_width="69dp"
@@ -48,6 +61,20 @@
         />
 
     <TextView
+        android:id="@+id/goatPrice"
+        android:layout_width="69dp"
+        android:layout_height="49dp"
+        android:fontFamily="@font/paytone_one"
+        android:text="200"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.751"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.541" />
+
+    <TextView
         android:id="@+id/rocketPrice"
         android:layout_width="69dp"
         android:layout_height="49dp"
@@ -62,7 +89,7 @@
         app:layout_constraintVertical_bias="0.153" />
 
     <TextView
-        android:id="@+id/hattPrice"
+        android:id="@+id/hatPrice"
         android:layout_width="69dp"
         android:layout_height="49dp"
         android:fontFamily="@font/paytone_one"
@@ -74,4 +101,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.348" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="107dp"
+        android:layout_height="50dp"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.803" />
 </androidx.constraintlayout.widget.ConstraintLayout>
