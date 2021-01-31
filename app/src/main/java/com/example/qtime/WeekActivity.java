@@ -47,7 +47,7 @@ public class WeekActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v){
-                day = 2;
+                day = 3;
                 openDayActivity();
             }
         });
@@ -58,7 +58,7 @@ public class WeekActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v){
-                day = 2;
+                day = 4;
                 openDayActivity();
             }
         });
@@ -69,7 +69,7 @@ public class WeekActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v){
-                day = 2;
+                day = 5;
                 openDayActivity();
             }
         });
@@ -80,7 +80,7 @@ public class WeekActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v){
-                day = 2;
+                day = 6;
                 openDayActivity();
             }
         });
@@ -91,7 +91,7 @@ public class WeekActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v){
-                day = 2;
+                day = 7;
                 openDayActivity();
             }
         });

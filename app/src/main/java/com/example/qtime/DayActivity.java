@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -78,6 +79,21 @@ public class DayActivity extends AppCompatActivity implements TimePickerDialog.O
 
         createNotificationChannel();
         loadData();
+
+        ImageButton deleteBtn = (ImageButton) findViewById(R.id.delete);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int last = list.size() - 1;
+                if(last <0 ){
+                    last = 0;
+                }
+                list.remove(last);
+                saveData();
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         Button startBtn = (Button) findViewById(R.id.startTime);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override

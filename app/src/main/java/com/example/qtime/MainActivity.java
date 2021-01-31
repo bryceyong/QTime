@@ -26,7 +26,7 @@ import static com.example.qtime.WeekActivity.day;
 
 public class MainActivity extends AppCompatActivity {
 
-    public int today;
+    public static int today;
     public static int status;
     private String shared;
     private ArrayList<Task> list;
@@ -43,7 +43,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         ImageView img = (ImageView)findViewById(R.id.imageView);
+        img.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v){
+                openAfkActivity();
+            }
+        });
         img.setBackgroundResource(R.drawable.idle);
         if(status > 2){
             img.setBackgroundResource(R.drawable.happy);
@@ -71,23 +79,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         Calendar cal = Calendar.getInstance();
-        today = cal.get(Calendar.DAY_OF_WEEK);
-        if(today == 2){
-            shared = "monday";
-        } else if(today == 3){
-            shared = "tuesday";
-        } else if(today == 4){
-            shared = "wednesday";
-        }else if(today == 5){
-            shared = "thursday";
-        }else if(today == 6){
-            shared = "friday";
-        }else if(today == 7){
-            shared = "saturday";
-        }else if(today == 1){
-            shared = "sunday";
-        }
-        loadTimeData();
+
         ImageView img = (ImageView)findViewById(R.id.imageView);
         img.setBackgroundResource(R.drawable.idle);
         if(status > 2){
@@ -107,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openAfkActivity(){
+        Intent intent = new Intent(this, AfkActivity.class);
+        startActivity(intent);
+    }
+
     public void saveCatData(){
         //SharedPreference saving
         SharedPreferences sharedPreferences = getSharedPreferences("status", MODE_PRIVATE);
@@ -120,15 +117,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("status", MODE_PRIVATE);
         status = sharedPreferences.getInt("cat", 1);
 
-    }
-
-    private void saveTimeData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(shared, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        editor.putString("task list", json);
-        editor.apply();
     }
 
     private void loadTimeData(){
