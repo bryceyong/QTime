@@ -4,118 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efdecd"
     tools:context=".DayActivity">
 
 
-    <TextView
-        android:id="@+id/dayOfTheWeek"
-        android:layout_width="106dp"
-        android:layout_height="46dp"
-        android:text="TextView"
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="364dp"
+        android:layout_height="151dp"
+        android:background="@drawable/monday"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036" />
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="411dp"
-        android:layout_height="403dp"
-        android:background="@android:color/darker_gray"
+        android:layout_width="373dp"
+        android:layout_height="343dp"
+        android:background="@drawable/recylcer"
         android:padding="4dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/inputTask"
-        android:layout_width="272dp"
-        android:layout_height="40dp"
-        android:hint="task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
-
-    <Button
-        android:id="@+id/startTime"
-        android:layout_width="77dp"
-        android:layout_height="44dp"
-        android:text="startTime"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.901" />
-
-    <Button
-        android:id="@+id/endTime"
-        android:layout_width="61dp"
-        android:layout_height="35dp"
-        android:text="endTime"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.597"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
-
-    <Button
-        android:id="@+id/confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="292dp"
-        android:text="Confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
-
-    <TextView
-        android:id="@+id/startTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/inputTask"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
-
-    <TextView
-        android:id="@+id/endTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.427"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
+        app:layout_constraintVertical_bias="0.498" />
 
     <ImageButton
         android:id="@+id/delete"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="107dp"
+        android:layout_height="71dp"
         android:layout_marginStart="200dp"
         android:layout_toEndOf="@+id/task"
-        android:background="@drawable/day"
+        android:background="@drawable/del"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.855"
+        app:layout_constraintHorizontal_bias="0.684"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.924" />
+
+    <ImageButton
+        android:id="@+id/add"
+        android:layout_width="107dp"
+        android:layout_height="71dp"
+        android:layout_toEndOf="@+id/task"
+        android:background="@drawable/add"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.928" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

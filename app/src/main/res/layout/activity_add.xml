@@ -4,77 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efdecd"
     tools:context=".AddActivity">
 
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/inputTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="337dp"
+        android:layout_height="58dp"
+        android:fontFamily="@font/paytone_one"
         android:hint="task"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.283"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.31" />
 
-    <Button
+    <ImageButton
         android:id="@+id/startTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/start"
+        android:clickable="true"
         android:text="startTime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.427" />
+        app:layout_constraintVertical_bias="0.459" />
 
-    <Button
+    <ImageButton
         android:id="@+id/endTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="endTime"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/end"
+        android:clickable="true"
+        android:text="endime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.427" />
-
-    <Button
-        android:id="@+id/confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="244dp"
-        android:text="Confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.667" />
+        app:layout_constraintVertical_bias="0.459" />
 
     <TextView
         android:id="@+id/startTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_width="72dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/paytone_one"
+        android:text="00:00"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/inputTask"
-        app:layout_constraintHorizontal_bias="0.286"
+        app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348" />
+        app:layout_constraintVertical_bias="0.446" />
 
     <TextView
         android:id="@+id/endTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_width="72dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/paytone_one"
+        android:text="00:00"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.762"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348" />
+        app:layout_constraintVertical_bias="0.446" />
+
+    <ImageButton
+        android:id="@+id/confirm"
+        android:layout_width="103dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="200dp"
+        android:layout_toEndOf="@+id/task"
+        android:background="@drawable/add"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
